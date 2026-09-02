@@ -55,24 +55,32 @@
   },
   "homepage": "https://github.com/nff747/neural-texture-engine#readme",
   "peerDependencies": {
-    "three": ">=0.160.0",
     "@react-three/fiber": ">=8.0.0",
-    "react": ">=18.0.0"
+    "react": ">=18.0.0",
+    "three": ">=0.160.0"
   },
   "peerDependenciesMeta": {
-    "@react-three/fiber": { "optional": true },
-    "react": { "optional": true }
+    "@react-three/fiber": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
   },
   "devDependencies": {
-    "@types/three": "^0.169.0",
-    "@types/react": "^18.3.0",
-    "three": "^0.170.0",
-    "react": "^18.3.0",
     "@react-three/fiber": "^8.17.0",
+    "@types/react": "^18.3.0",
+    "@types/three": "^0.169.0",
+    "@webgpu/types": "^0.1.50",
+    "eslint": "^9.0.0",
+    "happy-dom": "^20.13.1",
+    "react": "^18.3.0",
+    "three": "^0.170.0",
     "tsup": "^8.3.0",
     "typescript": "^5.6.0",
-    "vitest": "^2.1.0",
-    "eslint": "^9.0.0",
-    "@webgpu/types": "^0.1.50"
+    "vitest": "^2.1.0"
+  },
+  "directories": {
+    "example": "examples"
   }
 }
