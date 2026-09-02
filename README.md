@@ -1,5 +1,8 @@
 <div align="center">
 
+<img src="assets/banner.jpg" width="800" alt="Project Banner">
+
+
 # 🔥 neural-texture-engine
 
 **WebGPU + Browser-Local AI for Real-Time 4K Procedural Texture Generation**
@@ -380,6 +383,9 @@ npm run dev
 ---
 
 <div align="center">
+
+<img src="assets/banner.jpg" width="800" alt="Project Banner">
+
 <br>
 
 *Ship geometry, not pixels.*
