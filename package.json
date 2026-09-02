@@ -1,0 +1,78 @@
+{
+  "name": "neural-texture-engine",
+  "version": "0.1.0",
+  "description": "WebGPU + browser-local AI engine for real-time 4K procedural texture generation from base meshes, reducing 3D web payload by 90%.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./react": {
+      "import": "./dist/react/index.js",
+      "require": "./dist/react/index.cjs",
+      "types": "./dist/react/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src/shaders"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nff747/neural-texture-engine.git"
+  },
+  "keywords": [
+    "webgpu",
+    "threejs",
+    "three.js",
+    "texture-generation",
+    "procedural",
+    "compute-shader",
+    "react-three-fiber",
+    "r3f",
+    "ai-upscaling",
+    "neural-network",
+    "real-time",
+    "4k-textures"
+  ],
+  "author": "iKi <nff747@users.noreply.github.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nff747/neural-texture-engine/issues"
+  },
+  "homepage": "https://github.com/nff747/neural-texture-engine#readme",
+  "peerDependencies": {
+    "three": ">=0.160.0",
+    "@react-three/fiber": ">=8.0.0",
+    "react": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@react-three/fiber": { "optional": true },
+    "react": { "optional": true }
+  },
+  "devDependencies": {
+    "@types/three": "^0.169.0",
+    "@types/react": "^18.3.0",
+    "three": "^0.170.0",
+    "react": "^18.3.0",
+    "@react-three/fiber": "^8.17.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0",
+    "eslint": "^9.0.0",
+    "@webgpu/types": "^0.1.50"
+  }
+}
