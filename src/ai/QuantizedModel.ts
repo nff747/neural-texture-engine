@@ -75,21 +75,33 @@ export class QuantizedModel {
         const scales = new Float32Array(l.outCh);
         const biases = new Float32Array(l.outCh);
 
-        // Kaiming-inspired initialization scaled to INT8 range
-        const stddev = Math.sqrt(2.0 / (l.inCh * l.kH * l.kW));
-        const int8Scale = 127.0 * stddev;
+        for (let oc = 0; oc < l.outCh; oc++) {
+          scales[oc] = 1.0 / 127.0;
+          biases[oc] = 0.0;
+          for (let ic = 0; ic < l.inCh; ic++) {
+            for (let ky = 0; ky < l.kH; ky++) {
+              for (let kx = 0; kx < l.kW; kx++) {
+                const wIdx = ((oc * l.inCh + ic) * l.kH + ky) * l.kW + kx;
+                const midY = (l.kH - 1) / 2;
+                const midX = (l.kW - 1) / 2;
+                const distSq = (ky - midY) * (ky - midY) + (kx - midX) * (kx - midX);
 
-        for (let i = 0; i < numWeights; i++) {
-          // Box-Muller transform for normal distribution
-          const u1 = Math.random();
-          const u2 = Math.random();
-          const normal = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
-          weights[i] = Math.max(-127, Math.min(127, Math.round(normal * int8Scale)));
-        }
-
-        for (let i = 0; i < l.outCh; i++) {
-          scales[i] = stddev / 127.0;
-          biases[i] = 0;
+                if (oc % l.inCh === ic) {
+                  // Centered 2D Gaussian / unsharp sharpening kernel
+                  if (distSq < 0.5) {
+                    weights[wIdx] = 100; // Strong identity center
+                  } else if (distSq <= 2.0) {
+                    weights[wIdx] = -12; // High-frequency edge enhancer
+                  } else {
+                    weights[wIdx] = 4;   // Smooth boundary support
+                  }
+                } else {
+                  // Cross-channel chrominance gradient transfer
+                  weights[wIdx] = distSq < 1.0 ? 8 : -2;
+                }
+              }
+            }
+          }
         }
 
         return {
