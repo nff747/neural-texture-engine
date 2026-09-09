@@ -5,5 +5,5 @@ export { TextureCache } from './pipeline/TextureCache';
 export { RenderHook } from './pipeline/RenderHook';
 export { QuantizedModel } from './ai/QuantizedModel';
 export type * from './types';
-export { WebGPUProfiler } from './core/WebGPUProfiler';
+export { WebGPUCapabilityProfiler } from './core/WebGPUCapabilityProfiler';
 export { BicubicProceduralSynthesizer } from './core/BicubicProceduralSynthesizer';

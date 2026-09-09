@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NTE - Three.js Integration</title>
+  <style>
+    body { margin: 0; overflow: hidden; background: #111; color: white; font-family: sans-serif; }
+    canvas { display: block; }
+    #info { position: absolute; top: 10px; left: 10px; z-index: 10; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div id="info">
+    <h2>NTE + Three.js</h2>
+    <p>Left: Low Res Base Texture<br>Right: AI Upscaled High Res Texture</p>
+  </div>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+        "neural-texture-engine": "../../dist/index.js"
+      }
+    }
+  </script>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

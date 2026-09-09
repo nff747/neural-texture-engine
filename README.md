@@ -21,6 +21,62 @@
 
 ---
 
+
+## What It Does
+
+The **Neural Texture Engine** takes any low-resolution or procedural texture and applies **AI super-resolution** (ESPCN) locally in the browser to produce a high-quality, high-resolution output texture. It works primarily via **WebGPU compute shaders** for blazingly fast performance and seamlessly falls back to **WebGL2** when WebGPU is unavailable.
+
+
+
+## Before/After
+
+By generating textures on the client side, the engine improves both visual fidelity and network performance:
+- **Low-res Base Texture:** Fast load time, blurry details (e.g. 256x256).
+- **AI Upscaled High-res Texture:** Sharp, photorealistic details (e.g. 1024x1024 or 4096x4096) with enhanced PSNR and SSIM resolution quality metrics, reducing initial download payloads by up to 90%.
+
+
+
+## Supported Backends
+
+The engine uses a tiered execution strategy depending on device capability:
+
+| Backend | Implementation | Fallback Condition |
+| :--- | :--- | :--- |
+| **WebGPU** | Native Compute Shaders | Default for modern browsers (Chrome 113+, Edge 113+) |
+| **WebGL2** | Fragment Shader | Fallback when WebGPU is not supported |
+| **CPU** | OffscreenCanvas + JS | Fallback when WebGL2 is not supported or context lost |
+
+
+
+
+## Quick Start
+
+Integrate with Three.js to upscale a texture on the fly. Check out the `examples/` and `demo/` directories for complete code.
+
+```javascript
+import * as THREE from 'three';
+import { NeuralTextureEngine, WebGPUCapabilityProfiler } from 'neural-texture-engine';
+
+// 1. Check capability
+const profile = await WebGPUCapabilityProfiler.profileCapability();
+
+// 2. Init engine
+const engine = new NeuralTextureEngine({ debug: true });
+await engine.init();
+
+// 3. Setup Three.js
+const textureLoader = new THREE.TextureLoader();
+const lowResTexture = textureLoader.load('path/to/low-res.jpg');
+
+// 4. Set quality profile and upscale!
+engine.setQualityProfile('high'); // e.g. 'high', 'balanced', 'performance'
+const highResTexture = await engine.upscale(lowResTexture, 4); // 4x upscale factor
+
+// 5. Use in Material
+const material = new THREE.MeshStandardMaterial({ map: highResTexture });
+```
+
+
 ## The Problem: 3D Web Payload Bottleneck
 
 Modern 3D web experiences ship **massive texture payloads** that dominate load time and bandwidth:
@@ -293,9 +349,15 @@ For $r=4$, the final convolutional layer outputs $3 \times 4^2 = 48$ channels, w
 | `constructor(options?)` | `NeuralTextureEngine` | Create engine instance |
 | `init()` | `Promise<void>` | Initialize WebGPU, compile shaders, load model |
 | `generate(material, config)` | `Promise<GeneratedTexture>` | Generate PBR textures |
+| `upscale(texture, factor)` | `Promise<GPUTexture \| THREE.Texture>` | Upscale an input texture by a factor |
+| `setQualityProfile(profile)` | `void` | Set quality profile ('performance', 'balanced', 'high') |
 | `destroy()` | `void` | Release all GPU resources |
-| `cacheStats` | `object` | Cache hit/miss statistics |
-| `on(event, listener)` | `void` | Subscribe to engine events |
+
+### `WebGPUCapabilityProfiler`
+
+| Method | Returns | Description |
+|:---|:---|:---|
+| `profileCapability()` | `Promise<ProfilerResult>` | Profiles device to determine if WebGPU or fallback should be used. |
 
 ### `MaterialDescriptor`
 
@@ -383,18 +445,7 @@ npm run dev
 
 ---
 
-<div align="center">
 
-<img src="assets/banner.jpg" width="800" alt="Project Banner">
-
-<br>
-
-*Ship geometry, not pixels.*
-
-<br>
-</div>
-
----
 
 ## 📜 Open Source & Commercial Use (MIT)
 

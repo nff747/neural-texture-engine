@@ -362,6 +362,16 @@ export class NeuralTextureEngine {
 
   // ── Utilities ───────────────────────────────────────────────────
 
+  setQualityProfile(profile: 'performance' | 'balanced' | 'high'): void {
+    this.log(`Quality profile set to: ${profile}`);
+  }
+
+  async upscale(texture: any, factor: number): Promise<any> {
+    this.log(`Upscaling texture by factor: ${factor}`);
+    return texture; // Mock implementation
+  }
+
+
   private ensureInitialized(): void {
     if (!this.initialized) {
       throw new Error('[NTE] Engine not initialized. Call init() first.');

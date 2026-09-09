@@ -5,7 +5,7 @@ export interface ProfilerResult {
   computeTimeMs: number;
 }
 
-export class WebGPUProfiler {
+export class WebGPUCapabilityProfiler {
   /**
    * Profiles WebGPU compute capabilities. 
    * If compute takes > 16ms or WebGPU is unsupported, falls back to WebGL2.
