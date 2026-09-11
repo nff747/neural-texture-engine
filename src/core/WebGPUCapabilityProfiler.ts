@@ -88,3 +88,6 @@ export class WebGPUCapabilityProfiler {
     }
   }
 }
+
+export { WebGPUCapabilityProfiler as WebGPUProfiler };
+

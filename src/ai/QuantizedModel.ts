@@ -158,21 +158,21 @@ export class QuantizedModel {
         size: packedWeights.byteLength,
         usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST,
       });
-      device.queue.writeBuffer(weightsBuffer, 0, packedWeights);
+      device.queue.writeBuffer(weightsBuffer, 0, packedWeights.buffer as ArrayBuffer, packedWeights.byteOffset, packedWeights.byteLength);
 
       const scalesBuffer = device.createBuffer({
         label: `nte-scales-layer-${i}`,
         size: layer.scales.byteLength,
         usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST,
       });
-      device.queue.writeBuffer(scalesBuffer, 0, layer.scales);
+      device.queue.writeBuffer(scalesBuffer, 0, layer.scales.buffer as ArrayBuffer, layer.scales.byteOffset, layer.scales.byteLength);
 
       const biasesBuffer = device.createBuffer({
         label: `nte-biases-layer-${i}`,
         size: layer.biases.byteLength,
         usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST,
       });
-      device.queue.writeBuffer(biasesBuffer, 0, layer.biases);
+      device.queue.writeBuffer(biasesBuffer, 0, layer.biases.buffer as ArrayBuffer, layer.biases.byteOffset, layer.biases.byteLength);
 
       this.gpuBuffers.push(weightsBuffer, scalesBuffer, biasesBuffer);
     }

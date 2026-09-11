@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { WebGPUProfiler } from './WebGPUProfiler';
+import { WebGPUCapabilityProfiler, WebGPUProfiler } from './WebGPUCapabilityProfiler';
 
   // @ts-ignore
   global.GPUBufferUsage = { STORAGE: 1, COPY_SRC: 2, COPY_DST: 4 };
