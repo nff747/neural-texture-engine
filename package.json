@@ -27,7 +27,7 @@
     "dev": "tsup --watch",
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
-    "test": "vitest",
+    "test": "vitest run",
     "prepublishOnly": "npm run build"
   },
   "repository": {
@@ -48,7 +48,7 @@
     "real-time",
     "4k-textures"
   ],
-  "author": "iKi <nff747@users.noreply.github.com>",
+  "author": "nff747 <nff747@users.noreply.github.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/nff747/neural-texture-engine/issues"
