@@ -1,88 +1,67 @@
 {
   "name": "neural-texture-engine",
-  "version": "0.1.0",
-  "description": "WebGPU + browser-local AI engine for real-time 4K procedural texture generation from base meshes, reducing 3D web payload by 90%.",
+  "version": "0.2.0",
+  "description": "Real-time AI-driven procedural texture synthesis and super-resolution engine powered by WebGPU and WGSL",
   "type": "module",
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "default": "./dist/index.js"
     },
     "./react": {
       "types": "./dist/react/index.d.ts",
-      "import": "./dist/react/index.cjs",
-      "require": "./dist/react/index.cjs"
+      "import": "./dist/react/index.js",
+      "default": "./dist/react/index.js"
     }
   },
   "files": [
     "dist",
-    "src/shaders"
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "lint": "eslint src --ext .ts,.tsx",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "prepublishOnly": "npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nff747/neural-texture-engine.git"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
   },
   "keywords": [
     "webgpu",
-    "threejs",
-    "three.js",
-    "texture-generation",
-    "procedural",
-    "compute-shader",
-    "react-three-fiber",
-    "r3f",
-    "ai-upscaling",
-    "neural-network",
-    "real-time",
-    "4k-textures"
+    "wgsl",
+    "neural-texture",
+    "procedural-generation",
+    "ai-texture",
+    "super-resolution",
+    "espcn",
+    "pbr"
   ],
   "author": "nff747 <nff747@users.noreply.github.com>",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/nff747/neural-texture-engine/issues"
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "@types/react": "^18.2.61",
+    "@types/react-dom": "^18.2.19",
+    "@webgpu/types": "^0.1.40",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.4",
+    "vitest": "^1.3.1"
   },
-  "homepage": "https://github.com/nff747/neural-texture-engine#readme",
   "peerDependencies": {
-    "@react-three/fiber": ">=8.0.0",
-    "react": ">=18.0.0",
-    "three": ">=0.160.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "peerDependenciesMeta": {
-    "@react-three/fiber": {
-      "optional": true
-    },
     "react": {
       "optional": true
+    },
+    "react-dom": {
+      "optional": true
     }
-  },
-  "devDependencies": {
-    "@react-three/fiber": "^8.17.0",
-    "@types/react": "^18.3.0",
-    "@types/three": "^0.169.0",
-    "@webgpu/types": "^0.1.50",
-    "eslint": "^9.0.0",
-    "happy-dom": "^20.13.1",
-    "react": "^18.3.0",
-    "three": "^0.170.0",
-    "tsup": "^8.3.0",
-    "typescript": "^5.6.0",
-    "vitest": "^5.0.3",
-    "vite": "^8.3.2",
-    "@types/node": "^22.0.0"
-  },
-  "directories": {
-    "example": "examples"
   }
 }
