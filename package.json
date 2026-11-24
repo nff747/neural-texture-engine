@@ -39,7 +39,7 @@
     "espcn",
     "pbr"
   ],
-  "author": "nff747 <nff747@users.noreply.github.com>",
+  "author": "Lunar Paradox <engineering@lunarparadox.com>",
   "license": "Apache-2.0",
   "devDependencies": {
     "@types/node": "^20.11.24",
